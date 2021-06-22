@@ -3,10 +3,10 @@
     padding: 0;
     box-sizing: border-box
 }
-.wrapComents{
+
+.wrapComents {
     margin: 10px auto;
     padding: 15px 20px;
     width: 900px;
     background-color: beige;
-    text-align: justify;
-}
+  }
