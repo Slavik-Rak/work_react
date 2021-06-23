@@ -19,7 +19,7 @@ export default function Posts({idUs}) {
         <div>
 
             {
-                arrPosts.map(post=><Post post={post}/>)
+                arrPosts.map(post=><Post key={post.id} post={post}/>)
             }
 
         </div>
