@@ -1,12 +1,13 @@
 import User from "../user/User";
 
-export default function Users({items}) {
+export default function Users({items, appFn}) {
 
-    console.log(items);
 
     return (
         <div>
-           {/*<User item={items}/>*/}
+            {
+                items.map(user => <User key={user.id} appFn={() => appFn(user.id)} item={user}/>)
+            }
         </div>
     );
 

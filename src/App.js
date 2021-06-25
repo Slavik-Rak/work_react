@@ -1,18 +1,26 @@
 import './App.css';
 import {useEffect, useState} from "react";
-import {getUsers} from "./components/services/api";
+import {getUser, getUsers} from "./components/services/api";
 import Users from "./components/users/Users";
 
 function App() {
 
 
-    let [users, setUsers] = useState([]);
+    let [user, setUser] = useState([])
+
+    let appFn = (id) => {
+        getUser(id).then(value => setUser(value.data));
+    }
+
+
+    let [users, setUsers] = useState(null);
 
     useEffect(() => {
 
         getUsers().then(usersArr => {
             {
                 setUsers(usersArr.data);
+
             }
         });
 
@@ -21,9 +29,17 @@ function App() {
 
     return (
         <div>
+            {
+                users && <Users items={users} appFn={appFn}/>
+            }
+            <hr/>
 
-            <Users items={users}/>
+            <div>
+                {user.username}
+            </div>
 
+
+            <hr/>
         </div>
     );
 }

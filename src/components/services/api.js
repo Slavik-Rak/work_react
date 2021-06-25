@@ -18,7 +18,7 @@ let axiosInstanse = axios.create({
 
 
 const getUsers = () => axiosInstanse('/users');
-const getUser = (id) => axiosInstanse('/users' + id);
+const getUser = (id) => axiosInstanse('/users/' + id);
 
 
 export {getUser, getUsers};
