@@ -1,25 +1,41 @@
-import logo from './logo.svg';
 import './App.css';
+import {getUser, getUsers,} from "./components/service/Api";
+import {useEffect, useState} from "react";
+import Users from "./components/users/Users";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
 
+
+    let [user,setUser]= useState([]);
+
+    let fn = (id)=> {
+        getUser(id).then(value => {
+            setUser(value.data);
+        })
+    };
+
+
+    let [usersArr,setUssersArr] = useState([]);
+
+    useEffect(() => {
+
+        getUsers().then(value => {
+            setUssersArr(value.data);
+            console.log(value.data);
+        });
+
+    }, [])
+
+
+    return (
+        <div>
+                    <Users items={usersArr} fn={fn}/>
+
+            {
+                user && <div>{user.name} - {user.email}</div>
+            }
+
+        </div>
+    );
+}
 export default App;
