@@ -15,5 +15,8 @@ let getComents= ()=>{
     return  getUrlJson('/comments');
 }
 
-
-export {getUsers,getPosts,getComents}
+let getUserPost=(id)=>{
+    return  getUrlJson('/users/'+id+'/posts');
+}
+// https://jsonplaceholder.typicode.com/users/USER_ID_HERE/posts
+export {getUsers,getPosts,getComents,getUserPost}
