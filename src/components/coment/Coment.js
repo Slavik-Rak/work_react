@@ -2,6 +2,7 @@ export default function Coment({item}) {
 
     return (
         <div>
+            Coment
             <div>
                 {item.name}
             </div>

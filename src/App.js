@@ -1,16 +1,15 @@
 import {
     BrowserRouter as Router,
-    Switch,
     Route,
     Link,
 } from "react-router-dom"
 import './App.css';
 import Users from "./components/users/Users";
 import {useEffect, useState} from "react";
-import {getPosts, getUsers, getComents, getUserPost} from "./components/service/api";
+import {getPosts, getUsers, getComents, getUserPost, getPostComents} from "./components/service/api";
 import Posts from "./components/posts/Posts";
 import Coments from "./components/coments/Coments";
-import Post from "./components/post/Post";
+
 
 function App() {
 
@@ -19,6 +18,7 @@ function App() {
     let [arrPosts, setArrPosts] = useState([]);
     let [arrComents, setArrComents] = useState([]);
     let [userPost, setUserPost] = useState([]);
+   let [postComents, setPostComents] = useState([]);
 
 
     let fn = (id) => {
@@ -26,6 +26,15 @@ function App() {
             setUserPost(value.data)
         });
     }
+
+
+    let fnPaostId = (id)=>{
+        getPostComents(id).then(value => {
+            setPostComents(value.data);
+        });
+    }
+
+
 
 
     useEffect(() => {
@@ -57,13 +66,16 @@ function App() {
 
                 }}/>
                 <Route path={'/users'} render={() => <Users fn={fn} items={arrUsers}/>}/>
-                <Route path={'/posts'} render={() => <Posts items={arrPosts}/>}/>
+                <Route path={'/posts'} render={() => <Posts items={arrPosts} fnPaostId={fnPaostId}/>}/>
                 <Route path={'/coments'} render={() => <Coments items={arrComents}/>}/>
 
                 {
-                    userPost && <Posts items={userPost}/>
-                }
+                    userPost && <Posts items={userPost}  fnPaostId={fnPaostId}/>
 
+                }
+                {
+                    postComents && <Coments items={postComents}/>
+                }
             </div>
 
         </Router>
